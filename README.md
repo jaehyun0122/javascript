@@ -302,3 +302,81 @@ function name(){
 
 
 
+## 6. API(Application Programming Interface)
+
+> 응용 프로그램에서 사용할 수 있도록, 운영 체제나 프로그래밍 언어가 제공하는 기능을 제어할 수 있게 만든 인터페이스 - 위키백과
+
+### client  <=>| FrontEnd---- api ---- BackEnd |
+
+- 프론트엔드 : 사용자에게 보여지는 부분. client와 소통.
+- 백엔드 : client에게 보여줄 데이터를 가지고 있는 부분. 프론트엔드 요청에 따라 사용자에게 보여줄 데이터를 제공해준다.
+
+> api는 프론트엔드와 백엔드 사이에서 통신할 수 있도록 도와주는 부분.
+
+------
+
+## 7. javascript 동작 원리
+
+#### 1) stack
+
+자바스크립트코드가 실행되면 스택 프레임이 쌓이는 장소
+스택에 새로운 프레임이 들어오고 실행이 완료되면 나간다.
+드럼통 처럼 생겨서 First In Last Out구조의 자료형이다
+즉 처음에 들어간게 제일 마지막에 나간다.
+
+#### 2) heap
+
+동적으로 생성된 변수들은 메모리 heap에가서 저장이 된다
+
+#### 3) queue
+
+웹api로 부터 받은 테스크를 큐에 저장해둔다. 스택이 비면 이벤르 루프가 큐에 아이템을 꺼내다 스택으로 올린다.
+
+#### 4) event loop
+
+스택과 큐 사이에서 흐름을 제어한다
+이벤트 루프는 스택이 비어있는지 확인을하고 비어있으면 큐에있는 아이템을 꺼내다 스택에 올려준다.
+
+------
+
+
+
+setTimeout(()=>{
+
+​	console.log(2)
+
+}, 2000);
+
+2초 후에 동작
+
+
+
+Web Api로 보내지는 것들(시간이 걸리는 작업들)
+
+setTimeout, ajax(서버에 요청하는 코드), eventListener...
+
+1. url 준비
+2. 헤더 준비
+3. 서버 요청 => Web Api로 보내진다.
+4. 데이터 보여주기
+
+3번 보류하고 4번을 진행할 수 없으므로 async, await, fetch를 사용해준다.
+
+
+
+await을 쓰려면 함수를 async로 해줘야한다.
+
+```
+const getLatestNews = async() => {
+    let url = new URL(`https://api.newscatcherapi.com/v2/latest_headlines?countries=KR&topic=sport&page_size=2`);
+    console.log(url);
+    let header = new Headers({ 'x-api-key': 'MPhoSM0OA2cU_foMxrgKp9OeloSS2-7koCku0EDXaWA' });
+
+    let response = await fetch(url, { headers: header });
+}
+```
+
+function, var로 정의하면 호이스팅이 발생.
+
+그래서 function을 정의할 때 arrow funtion을 이용하면 호이스팅이 발생하지 안는다.
+

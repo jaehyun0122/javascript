@@ -1,0 +1,1 @@
+@keyframes를 활용해 스타벅스 홈페이지의 일부 animation기능 구현.
